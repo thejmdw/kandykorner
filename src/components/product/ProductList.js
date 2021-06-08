@@ -1,14 +1,18 @@
 import React from "react"
 import { useState, useContext, useEffect } from "react"
 import { ProductContext } from "./ProductProvider"
+import { OrderContext } from "../order/OrderProvider"
 import "./Product.css"
 
 export const ProductList = () => {
   const { products, getProducts } = useContext(ProductContext)
+  const { addProductToOrder } = useContext(OrderContext)
 
   useEffect(() => {
     getProducts()
   }, [])
+
+  
 
   return (
 <>
@@ -21,6 +25,7 @@ export const ProductList = () => {
           <h3>{p.name}</h3>
           <h5>{p.type.typeName}</h5>
           <h5>${p.price}</h5>
+          <button onClick={() => addProductToOrder(p.id)}>Add Item</button>
         </section>
 
       )
@@ -29,3 +34,6 @@ export const ProductList = () => {
     </>
   )
 }
+
+
+// { productId: p.id, customerId: parseInt(localStorage.getItem("kandy_customer"))}
