@@ -19,8 +19,8 @@ export const ProductList = () => {
       return (
         <section className="product" key={p.id}>
           <h3>{p.name}</h3>
-          <div>{p.type.typeName}</div>
-          <div>{p.price}</div>
+          <h5>{p.type.typeName}</h5>
+          <h5>${p.price}</h5>
         </section>
 
       )
