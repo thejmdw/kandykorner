@@ -13,7 +13,7 @@ export const ProductList = () => {
   return (
 <>
       <h3>Products</h3>
-    <section ClassName="products">
+    <section className="products">
       {
     products.map(p => {
       return (
