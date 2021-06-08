@@ -7,6 +7,8 @@ import { ProductList } from "./product/ProductList"
 import { EmployeeList } from "./employee/EmployeeList"
 import { EmployeeForm } from "./employee/EmployeeForm"
 import { EmployeeProvider } from "./employee/EmployeeProvider"
+import { OrderProvider } from "./order/OrderProvider"
+import { OrderList } from "./order/OrderList"
 
 export const ApplicationViews = () => {
   return (
@@ -14,24 +16,30 @@ export const ApplicationViews = () => {
       <LocationProvider>
         <ProductProvider>
           <EmployeeProvider>
-            <Route exact path="/">
-              <h3>Welcome to Kandy Korner</h3>
-            </Route>
+            <OrderProvider>
+              <Route exact path="/">
+                <h3>Welcome to Kandy Korner</h3>
+              </Route>
 
-            <Route exact path="/locations">
-              <LocationList />
-            </Route>
+              <Route exact path="/locations">
+                <LocationList />
+              </Route>
 
-            <Route exact path="/products">
-              <ProductList />
-            </Route>
+              <Route exact path="/products">
+                <ProductList />
+              </Route>
 
-            <Route exact path="/employees">
-              <EmployeeList />
-            </Route>
-            <Route exact path="/employees/create">
-              <EmployeeForm />
-            </Route>
+              <Route exact path="/employees">
+                <EmployeeList />
+              </Route>
+              <Route exact path="/employees/create">
+                <EmployeeForm />
+              </Route>
+
+              <Route exact path="/order">
+                <OrderList />
+              </Route>
+            </OrderProvider>
           </EmployeeProvider>
         </ProductProvider>
       </LocationProvider>
