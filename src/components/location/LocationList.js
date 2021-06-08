@@ -19,8 +19,8 @@ export const LocationList = () => {
       return (
         <section className="location" key={l.id}>
           <h3>{l.address}</h3>
-          <div>{l.sqFt}</div>
-          <div>{l.adaCompliant}</div>
+          <h5>{l.sqFt} square feet</h5>
+          {l.adaCompliant ? <h5>ADA Compliant</h5> : <h5>I'm sorry, we're not ADA Compliant</h5>}
         </section>
       )
     })}
