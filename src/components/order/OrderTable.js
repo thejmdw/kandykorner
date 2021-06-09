@@ -22,15 +22,48 @@ const useStyles = makeStyles({
 export const OrderTable = () => {
   const classes = useStyles();
   const { orders, getOrders, removeProductFromOrder } = useContext(OrderContext)
-  
+  const { products, getProducts } = useContext(ProductContext)
+  const [ filteredOrders, setFilteredOrders ] = useState([])
 
+  const [ groupedProducts, setGroupedProducts ] = useState([])
+
+  
   useEffect(() => {
     getOrders()
+    .then(getProducts) 
   }, [])
 
-  const filteredOrders = orders.filter(order => order.customerId === parseInt(localStorage.getItem("kandy_customer")))
+  
+  useEffect(() => {
+    const filteredOrders = orders.filter(order => order.customerId === parseInt(localStorage.getItem("kandy_customer")))
+    let orderTracker = {}
+    let jon = []
+
+    for (const order of filteredOrders) {
+      if (order.productId in orderTracker) {
+        orderTracker[order.productId] += 1 
+      } else {
+        orderTracker[order.productId] = 1
+      }
+    }
+    
+    for (const productId in orderTracker) {
+      const foundProductObj = products.find(product => parseInt(productId) === product.id)
+      // debugger
+      foundProductObj.quantity = orderTracker[productId]
+      console.log(foundProductObj)
+      jon.push(foundProductObj)
+    }
+    setGroupedProducts(jon)
+    console.log(orderTracker)
+  }, [products])
+
+
+
+
+
   // debugger
-  const quantity = (productId) => filteredOrders.filter(order => order.product.id === productId).length
+  // const quantity = (productId) => filteredOrders.filter(order => order.product.id === productId).length
 
   return (
     <TableContainer component={Paper}>
@@ -45,13 +78,13 @@ export const OrderTable = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {filteredOrders.map((order) => (
-            <TableRow key={order.product.id}>
+          {groupedProducts.map((product) => (
+            <TableRow key={product.id}>
               <TableCell component="th" scope="row">
-                {order.product.name}
+                {product.name}
               </TableCell>
-              <TableCell align="right">{quantity(order.product.id)}</TableCell>
-              <TableCell align="right">{(order.product.price)*quantity(order.productId)}</TableCell>
+              <TableCell align="right">{product.quantity}</TableCell>
+              <TableCell align="right">{(product.price)*(product.quantity)}</TableCell>
               {/* <TableCell align="right">{row.carbs}</TableCell> */}
               {/* <TableCell align="right">{row.protein}</TableCell> */}
             </TableRow>
