@@ -84,7 +84,7 @@ export const EmployeeForm = () => {
       <fieldset>
         <div className="form-group">
           <label htmlFor="name">Is this Employee a Manager?:</label>
-          <input type="checkbox" id="manager" required className="form-control"h3 onChange={handleControlledInputChange} />
+          <input type="checkbox" id="manager" required className="form-control" onChange={handleControlledInputChange} />
         </div>
       </fieldset>
       <fieldset>
