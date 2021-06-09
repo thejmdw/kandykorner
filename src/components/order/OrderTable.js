@@ -72,9 +72,9 @@ export const OrderTable = () => {
           <TableRow>
             <TableCell>Products</TableCell>
             <TableCell align="right">Quantity</TableCell>
-            {/* <TableCell align="right">Fat&nbsp;(g)</TableCell> */}
+            <TableCell align="right">Price/each</TableCell>
             {/* <TableCell align="right">Carbs&nbsp;(g)</TableCell> */}
-            <TableCell align="right">Price</TableCell>
+            <TableCell align="right">Total Price</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -84,8 +84,8 @@ export const OrderTable = () => {
                 {product.name}
               </TableCell>
               <TableCell align="right">{product.quantity}</TableCell>
+              <TableCell align="right">{product.price}</TableCell>
               <TableCell align="right">{(product.price)*(product.quantity)}</TableCell>
-              {/* <TableCell align="right">{row.carbs}</TableCell> */}
               {/* <TableCell align="right">{row.protein}</TableCell> */}
             </TableRow>
           ))}
