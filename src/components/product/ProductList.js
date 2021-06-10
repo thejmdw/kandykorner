@@ -5,21 +5,32 @@ import { OrderContext } from "../order/OrderProvider"
 import "./Product.css"
 
 export const ProductList = () => {
-  const { products, getProducts } = useContext(ProductContext)
+  const { products, getProducts, searchTerms } = useContext(ProductContext)
   const { addProductToOrder } = useContext(OrderContext)
+  const [ filteredProducts, setFilteredProducts ] = useState([])
 
   useEffect(() => {
     getProducts()
   }, [])
 
-  
+  useEffect(() => {
+    if (searchTerms !== "") {
+      
+      // If the search field is not blank, display matching products
+      const subset = products.filter(product => product.name.toLowerCase().includes(searchTerms.toLowerCase()))
+      setFilteredProducts(subset)
+    }  else {
+      // If the search field is blank, display all animals
+      setFilteredProducts(products)
+    }
+  }, [searchTerms, products])
 
   return (
 <>
       <h3>Products</h3>
     <section className="products">
       {
-    products.map(p => {
+    filteredProducts.map(p => {
       return (
         <section className="product" key={p.id}>
           <h3>{p.name}</h3>
